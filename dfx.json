@@ -1,19 +1,19 @@
 {
   "canisters": {
-    "hello_world_backend": {
-      "main": "src/hello_world_backend/main.mo",
+    "cryptobot_backend": {
+      "main": "src/cryptobot_backend/main.mo",
       "type": "motoko"
     },
-    "hello_world_frontend": {
+    "cryptobot_frontend": {
       "dependencies": [
-        "hello_world_backend"
+        "cryptobot_backend"
       ],
       "frontend": {
-        "entrypoint": "src/hello_world_frontend/src/index.html"
+        "entrypoint": "src/cryptobot_frontend/src/index.html"
       },
       "source": [
-        "src/hello_world_frontend/assets",
-        "dist/hello_world_frontend/"
+        "src/cryptobot_frontend/assets",
+        "dist/cryptobot_frontend/"
       ],
       "type": "assets"
     }
