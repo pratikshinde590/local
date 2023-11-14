@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Routes, Route, Outlet, Link, BrowserRouter } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Pages
 import Home from './routes/home';
-import Dashboard from './routes/dashboard';
+import Dashboard from './routes/dashboard/dashboard';
 import CreateInvestment from './routes/create-investment';
 
 // Add routes to following function
