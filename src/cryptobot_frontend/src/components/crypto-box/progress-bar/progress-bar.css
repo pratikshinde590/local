@@ -1,0 +1,18 @@
+.progressBar {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 12px;
+}
+.progressBar section {
+    font-size: 12px;
+}
+.progressBar div {
+    width: 100%;
+    line-height: 25px;
+    border-radius: 4px;
+    background: linear-gradient(180deg, #7fc9ff 0%, #1193f0 100%);
+    margin-top: 2px;
+    font-size: 12px;
+    padding-left: 10px;
+    color: white;
+}
