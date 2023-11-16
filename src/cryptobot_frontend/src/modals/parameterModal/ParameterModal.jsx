@@ -1,5 +1,5 @@
 import React from 'react'
-import "./parameter.modal.css"
+import "./parameter.modal.scss"
 import { Button, Form } from 'react-bootstrap'
 
 const ParameterModal = ({ handleClose }) => {

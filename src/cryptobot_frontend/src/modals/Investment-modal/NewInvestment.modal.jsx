@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import "./new.investment.modal.css"
+import "./new.investment.modal.scss"
 import { useNavigate } from 'react-router-dom';
 
 const NewInvestmentModal = () => {
