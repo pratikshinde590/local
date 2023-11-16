@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
-import "./chart-pie.css"
+import "./chart-pie.scss"
 
 const ChartPie = () => {
 

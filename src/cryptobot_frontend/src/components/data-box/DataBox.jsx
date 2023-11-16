@@ -1,5 +1,5 @@
 import React from 'react'
-import "./databox.css"
+import "./databox.scss"
 
 const DataBox = () => {
     return (

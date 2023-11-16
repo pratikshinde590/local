@@ -1,26 +1,15 @@
-// import React from 'react';
-
-// export default function Dashboard() {
-//     return (
-//       <div>
-//         <h1>Dashboard</h1>
-//       </div>
-//     );
-// }
-import React from 'react';
-// import ReactDOM from 'react-dom/client';
-// import { Col, Container, Row } from "react-bootstrap"
-// import Menu from "../../components/menu/Menu"
-import "./dashboard.css"
+import React from "react"
+import "./dashboard.scss"
 import DataBox from "../../components/data-box/DataBox"
 import GraphBox from "../../components/graph-box/GraphBox"
 import CryptoBox from "../../components/crypto-box/CryptoBox"
 import ChartLine from "../../components/charts/linechart/ChartLine"
+import NavBar from "../../components/menu/NavBar"
 
 const DashBoard = () => {
   return (
     <div className="dashboard bg-gradient">
-      {/* <Menu /> */}
+      <NavBar />
 
       <div className="innerDash">
 
@@ -39,8 +28,8 @@ const DashBoard = () => {
 
           <div className="left-middle">
             <div className="graphSection">
-               <section>Portfolion Market Value over time</section>
-              <ChartLine/>
+              <section>Portfolion Market Value over time</section>
+              <ChartLine />
             </div>
           </div>
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import "./graph.css"
+import "./graph.scss"
 import ChartPie from '../charts/piechart/ChartPie'
 
 const GraphBox = () => {
@@ -11,8 +11,8 @@ const GraphBox = () => {
             </div>
             <ChartPie />
             <div className='graphData'>
-                <div> <section></section> Positions - 17</div>
-                <div> <section></section> Cash</div>
+                <div> <section style={{ backgroundColor: "#1193F0" }}></section> Positions - 17 <span>$1,42,269.42 (95%)</span></div>
+                <div> <section style={{ backgroundColor: "#96DC5F" }}></section> Cash <span>$1,42,269.42 (95%)</span></div>
             </div>
         </div>
     )

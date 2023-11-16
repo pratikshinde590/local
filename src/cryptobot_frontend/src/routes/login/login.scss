@@ -1,0 +1,39 @@
+.login {
+    background-color: #EBEFF3;
+
+    .inner1 {
+        width: 400px;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .inner2 {
+        width: 400px;
+        padding: 10px;
+
+        .continue {
+            font-size: 13px;
+            font-weight: 500;
+            color: #797979;
+        }
+
+        .continueBtn {
+            background: linear-gradient(60deg, rgb(59, 78, 246), rgb(163, 20, 188));
+            border: none;
+        }
+
+        .another {
+            color: rgb(59, 78, 246);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .opt {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            font-size: 14px;
+            font-weight: 600;
+            color: rgb(59, 78, 246);
+        }
+    }
+}

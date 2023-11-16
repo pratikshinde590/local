@@ -1,0 +1,38 @@
+.parameter-modal {
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.40);
+    backdrop-filter: blur(2px);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 10;
+
+}
+
+.parameterInnerBox {
+    width: 360px;
+    height: 100vh;
+    background-color: white;
+    margin-left: auto;
+}
+
+.parameterInnerBox header {
+    position: relative;
+}
+
+.parameterInnerBox header span {
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+}
+
+.parameterBtnColor {
+    background-color: #1193F0;
+    font-size: 13px;
+}
+
+.parameterCheck{
+  font-size: 12px;
+  font-weight: 500;
+}

@@ -1,5 +1,5 @@
 import React from 'react'
-import "./progress-bar.css"
+import "./progress-bar.scss"
 
 const ProgressBar = ({ gradient, percent, title }) => {
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import "./cryptobox.css"
+import "./cryptobox.scss"
 import { Col, Container, Row } from 'react-bootstrap'
 // import img from "../../../assets/bitcoin.svg"
 import ProgressBar from './progress-bar/ProgressBar'
@@ -9,7 +9,10 @@ const CryptoBox = () => {
         <div className='cyptoBox'>
             <Container fluid>
                 <Row className='pt-2 crypto-top ps-2 pe-2'>
-                    {/* <Col> <img src={img} alt="" /> BTC/ETH</Col> */}
+                    <Col>
+                        {/* <img src={img} alt="" />  */}
+                        BTC/ETH
+                    </Col>
                     <Col className='text-end digit fw-bold fs-6'>$3,397,185,533</Col>
                 </Row>
             </Container>
