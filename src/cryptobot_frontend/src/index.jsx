@@ -7,10 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Dashboard from './routes/dashboard/dashboard';
 import CreateInvestment from './routes/create-investment/CreateInvestment';
 import Login from './routes/login/Login';
-import ICP from './routes/login/ICP';
 import NewInvestMents from './routes/new-investments/NewInvestMents';
 import Investments from './routes/Investments/Investments';
-import Home from './routes/home';
 
 
 // Add routes to following function
@@ -18,13 +16,12 @@ export default function App() {
   return (
     <Routes>
       <Route path="/">
-        <Route index element={<Home />} />
+        <Route index element={<Login />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path='investments' element={<Investments />} />
         <Route path="create-investments" element={<CreateInvestment />} />
         <Route path='new-investments' element={<NewInvestMents />} />
-        <Route path='login' element={<Login />} />
-        <Route path='login/ICP' element={<ICP />} />
+        {/* <Route path='login' element={<Login />} /> */}
 
         {/* Using path="*"" means "match anything", so this route acts like a catch-all for URLs that we don't have explicit routes for. */}
         <Route path="*" element={<NoMatch />} />
@@ -40,7 +37,7 @@ function NoMatch() {
     <div>
       <h2>Nothing to see here!</h2>
       <p>
-        <Link to="/">Go to the home page</Link>
+        <Link to="/">Go to the login page</Link>
       </p>
     </div>
   );
