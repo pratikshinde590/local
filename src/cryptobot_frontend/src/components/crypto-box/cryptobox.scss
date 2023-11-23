@@ -1,0 +1,23 @@
+.cyptoBox {
+    width: 100%;
+    height: 160px;
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom: 15px;
+
+    .crypto-top {
+        font-size: 14px;
+        font-weight: 500;
+        color: #8A9299;
+
+        img {
+            width: 24px;
+            padding-right: 2px;
+            position: relative;
+            top: -1.5px;
+        }
+        .digit{
+            color: #1193F0;
+        }
+    }
+}

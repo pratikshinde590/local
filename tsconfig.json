@@ -6,4 +6,7 @@
       "jsx": "react",            /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */
     },
     "include": ["src/**/*"],
+    "exclude": [
+      "src/cryptobot_frontend/src/backend/utils.js",
+  ]
 }
