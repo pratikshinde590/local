@@ -1,0 +1,29 @@
+.historyPage {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #EBEFF3;
+
+    .investHeader{
+        width: 100%;
+        line-height: 45px;
+        background-color: white;
+        padding-left: 20px;
+        font-size: 13px;
+    }
+    
+
+    .bt-primary {
+        color: #1193F0;
+        font-size: 12px;
+    }
+
+    .secondary-text {
+        font-size: 12px;
+        color: #828282;
+    }
+
+    .box-style{
+        height: 65px;
+        min-width: 250px;
+    }
+}

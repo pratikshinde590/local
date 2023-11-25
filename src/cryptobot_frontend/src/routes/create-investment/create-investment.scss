@@ -1,6 +1,6 @@
 .createInvestment{
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #EBEFF3;
     
     .createInvestHeader{
@@ -36,5 +36,10 @@
     
     .trade-colorBox-2{
         background-color: #D1F6B4;
+    }
+
+    .box-style{
+        height: 75px;
+        min-width: 250px;
     }
 }

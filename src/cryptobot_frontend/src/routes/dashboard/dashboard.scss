@@ -6,29 +6,11 @@
     .innerDash {
         width: 98%;
         margin: auto;
-        display: grid;
-        grid-template-columns: 2fr 1fr;
-        margin-top: 15px;
-        grid-gap: 20px;
 
         .left {
-            .left-inner {
-                display: grid;
-                grid-template-columns: 40% 60%;
-                grid-gap: 5px;
-
-                .left-inner-left-section {
-                    padding: 5px;
-                }
-
-                .left-inner-right-section {
-                    padding: 5px;
-                }
-            }
 
             .left-middle {
-                padding-left: 5px;
-                margin-top: -15px;
+                margin-top: -13px;
 
                 .graphSection {
                     width: 100%;
@@ -37,7 +19,7 @@
                     border-radius: 10px;
                     padding-top: 15px;
 
-                    section{
+                    section {
                         font-size: 14px;
                         padding-left: 20px;
                         margin-bottom: 15px;
@@ -46,18 +28,11 @@
             }
 
             .left-bottom {
-                padding-left: 5px;
                 width: 100%;
-                display: grid;
-                grid-gap: 20px;
-                grid-template-columns: 1fr 1fr;
                 margin-top: 20px;
             }
         }
 
-        .right {
-            padding: 5px;
-        }
     }
 
 }
