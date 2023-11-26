@@ -8,7 +8,10 @@ import Dashboard from './routes/dashboard/dashboard';
 import CreateInvestment from './routes/create-investment/CreateInvestment';
 import Login from './routes/login/Login';
 import NewInvestMents from './routes/new-investments/NewInvestMents';
-import Investments from './routes/Investments/Investments';
+import Investments from './routes/investments/Investments';
+import InvestmentHistory from './routes/investment-history/InvestmentHistory';
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 
 // Add routes to following function
@@ -20,6 +23,7 @@ export default function App() {
         <Route path="dashboard" element={<Dashboard />} />
         <Route path='investments' element={<Investments />} />
         <Route path="create-investments" element={<CreateInvestment />} />
+        <Route path='/investment-history' element={<InvestmentHistory />} />
         <Route path='new-investments' element={<NewInvestMents />} />
         {/* <Route path='login' element={<Login />} /> */}
 
@@ -48,7 +52,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>
 );

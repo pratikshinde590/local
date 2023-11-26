@@ -24,20 +24,21 @@ const NewInvestMents = () => {
                         <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
                     </svg>
                     <span className='fw-bold'>Dashboard</span>
-                    <span style={{ color: "#828282" }}> / New Investment Plan</span></header>
+                    <span style={{ color: "#828282" }}> / New Investment Plan</span>
+                </header>
                 <Container className='mt-4'>
                     <Row>
                         <Col className='fw-bold'>New Investment Plan</Col>
                         <Col className='text-end newInvestBtnCon'>
                             <Button className='ms-3 rounded-5 ps-4 pe-4 btn-light' style={{ color: "#1193F0" }} onClick={() => handleParameterPopUp(true)}>Parameters</Button>
                             <Button className='ms-3 rounded-5 ps-4 pe-4 btn-light' style={{ color: "#1193F0" }}>Print</Button>
-                            <InvestPopUp/>
+                            <InvestPopUp />
                         </Col>
                     </Row>
                 </Container>
 
                 <Container className='mt-4'>
-                    <Table striped hover>
+                    <Table responsive striped hover>
                         <thead style={{ fontSize: "14px" }}>
                             <tr>
                                 <th className='bg-dark text-white fw-medium rounded-start-3'>#</th>

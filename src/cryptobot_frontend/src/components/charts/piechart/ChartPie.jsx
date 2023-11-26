@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react';
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+import React from 'react';
+import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import "./chart-pie.scss"
 
 const ChartPie = () => {
@@ -13,23 +13,24 @@ const ChartPie = () => {
     return (
         <>
             <div className='chartPie'>
-
-                <PieChart width={500} height={250}>
-                    <Pie
-                        data={data}
-                        cx={170}
-                        cy={100}
-                        innerRadius={72}
-                        outerRadius={90}
-                        fill="#8884d8"
-                        paddingAngle={1}
-                        dataKey="value"
-                    >
-                        {data.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                        ))}
-                    </Pie>
-                </PieChart>
+                <ResponsiveContainer width="100%" aspect={1}>
+                    <PieChart>
+                        <Pie
+                            data={data}
+                            cx={"50%"}
+                            cy={100}
+                            innerRadius={72}
+                            outerRadius={90}
+                            fill="#8884d8"
+                            paddingAngle={1}
+                            dataKey="value"
+                        >
+                            {data.map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                            ))}
+                        </Pie>
+                    </PieChart>
+                </ResponsiveContainer>
             </div>
         </>
     )

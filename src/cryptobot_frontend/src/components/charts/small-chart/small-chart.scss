@@ -1,0 +1,15 @@
+.smallChart {
+    width: 55px;
+    height: 55px;
+    position: relative;
+
+    .percentage {
+        position: absolute;
+        z-index: 10;
+        font-size: 12px;
+        top: 17px;
+        left: 17px;
+        font-weight: 500;
+        color: #6B6F73;
+    }
+}
