@@ -23,7 +23,7 @@ export default function App() {
         <Route path="dashboard" element={<Dashboard />} />
         <Route path='investments' element={<Investments />} />
         <Route path="create-investments" element={<CreateInvestment />} />
-        <Route path='/investment-history' element={<InvestmentHistory />} />
+        <Route path='investment-history' element={<InvestmentHistory />} />
         <Route path='new-investments' element={<NewInvestMents />} />
         {/* <Route path='login' element={<Login />} /> */}
 

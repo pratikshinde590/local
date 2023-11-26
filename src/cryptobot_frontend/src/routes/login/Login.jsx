@@ -69,7 +69,6 @@ const Login = () => {
                         <section className="mb-2 fw-bold">Welcome!</section>
                         <div className="fw mt-4" style={{ fontSize: "14px" }}>Welcome to Crypto Trading Bot! Elevate your trading experience with a powerful trading bot and stay on top of your portfolio effortlessly. Happy trading!</div>
                         <Button className="w-75 rounded-5 mt-4" style={{ fontSize: "14px" }} onClick={handleLogin}>Sign in with ICP</Button>
-                        <Button className="w-50 rounded-5 mt-4" style={{ fontSize: "14px" }} onClick={() => navigate("/dashboard")}>Continue to Dashboard</Button>
                     </div>
                 )}
             </div>
