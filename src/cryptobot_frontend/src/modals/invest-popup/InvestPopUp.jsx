@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { mexcBuyOrder, mexcSellOrder } from '../../store/mexc-store/MexcSymbolSlice';
+import { mexcBuyOrder, mexcSellOrder } from '../../store/mexc-store/MexcSlice';
 
 const InvestPopUp = () => {
 
