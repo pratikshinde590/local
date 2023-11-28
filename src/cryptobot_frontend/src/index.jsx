@@ -8,7 +8,7 @@ import Dashboard from './routes/dashboard/dashboard';
 import CreateInvestment from './routes/create-investment/CreateInvestment';
 import Login from './routes/login/Login';
 import NewInvestMents from './routes/new-investments/NewInvestMents';
-import Investments from './routes/investments/Investments';
+import Investments from './routes/Investments/Investments';
 import InvestmentHistory from './routes/investment-history/InvestmentHistory';
 import { Provider } from "react-redux";
 import store from "./store/store";
@@ -23,7 +23,7 @@ export default function App() {
         <Route path="dashboard" element={<Dashboard />} />
         <Route path='investments' element={<Investments />} />
         <Route path="create-investments" element={<CreateInvestment />} />
-        <Route path='/investment-history' element={<InvestmentHistory />} />
+        <Route path='investment-history' element={<InvestmentHistory />} />
         <Route path='new-investments' element={<NewInvestMents />} />
         {/* <Route path='login' element={<Login />} /> */}
 
