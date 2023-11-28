@@ -75,13 +75,13 @@ const NewInvestSlice = createSlice({
             state.selectedExchange = action.payload;
         })
         builder.addCase(getSymbols.fulfilled, (state, action) => {
-            state.symbolList = action.payload?.data;
+            state.symbolList = action.payload.data;
         })
         builder.addCase(setSymbol.fulfilled, (state, action) => {
             state.selectedSymbol = action.payload;
         })
         builder.addCase(getSymbolPrice.fulfilled, (state, action) => {
-            state.selectedSymbolPrice = action.payload?.price;
+            state.selectedSymbolPrice = action.payload.price;
         })
         builder.addCase(resetSymbolPrice.fulfilled, (state) => {
             state.selectedSymbolPrice = "";

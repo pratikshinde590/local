@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
-import MexcSymbolSlice from './mexc-store/MexcSlice';
-import GateIoSymbolSlice from "./gate-io-store/GateIoSlice";
 import NewInvestSlice from "./common/NewInvestReducer"
+import GateIoSlice from './gate-io-store/GateIoSlice';
+import MexcSlice from './mexc-store/MexcSlice';
 
 const store = configureStore({
     reducer: {
-        MexcSymbols: MexcSymbolSlice,
-        GateIoSymbols: GateIoSymbolSlice,
+        MexcStore: MexcSlice,
+        GateIoStore: GateIoSlice,
         NewInvest: NewInvestSlice,
     },
 
