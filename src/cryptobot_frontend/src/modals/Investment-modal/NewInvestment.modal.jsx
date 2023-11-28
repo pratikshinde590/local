@@ -58,7 +58,7 @@ const NewInvestmentModal = () => {
 
   return (
     <>
-      <Button className="rounded-5 px-4 my-3 m-lg-0 m-auto" style={{ width: "150px", lineHeight: "35px" }} variant="primary" size="sm" onClick={handleShow}>
+      <Button className="rounded-5 px-4 my-3 m-lg-0 m-auto" variant="primary" size="sm" onClick={handleShow}>
         New Investment
       </Button>
 
