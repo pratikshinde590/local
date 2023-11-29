@@ -6,33 +6,42 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { mexcBuyOrder, mexcSellOrder } from '../../store/mexc-store/MexcSlice';
 
-const InvestPopUp = () => {
+const InvestPopUp = (props) => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [smShow, setSmShow] = useState(false);
 
-    //------------- paramter to buy trade --------------------//
-    const buyOrderData = {
-        "symbol": "HBARUSDT",
-        "type": "LIMIT",
-        "quantity": 85,
-        "price": 0.06056
-    }
+    // //------------- sample paramter to buy trade --------------------//
+    // const buyOrderData = {
+    //     "symbol": "HBARUSDT",
+    //     "type": "LIMIT",
+    //     "quantity": 85,
+    //     "price": 0.06056
+    // }
 
-    //------------- paramter to sell trade --------------------//
-    const sellOrderData = {
-        "symbol": "HBARUSDT",
-        "type": "LIMIT",
-        "quantity": 85,
-        "price": 0.06056
-    }
+    // //------------- sample paramter to sell trade --------------------//
+    // const sellOrderData = {
+    //     "symbol": "HBARUSDT",
+    //     "type": "LIMIT",
+    //     "quantity": 85,
+    //     "price": 0.06056
+    // }
+
+    const buyOrders = props.buyOrders;
+    const sellOrders = props.sellOrders;
+    const totalInvestment = buyOrders.reduce((acc, order) => acc + order.quantity * order.price, 0);
 
     //------------------------ Place order ------------------//
     const placeOrder = async () => {
-        await dispatch(mexcBuyOrder(buyOrderData));
-        await dispatch(mexcSellOrder(sellOrderData));
-        navigate("/create-investments");
+        for (const buyOrderData of buyOrders) {
+            await dispatch(mexcBuyOrder(buyOrderData));
+        }
+        for (const sellOrderData of sellOrders) {
+            await dispatch(mexcSellOrder(sellOrderData));
+        }
+        // navigate("/create-investments");
+        setSmShow(false)
     }
 
 
@@ -53,7 +62,7 @@ const InvestPopUp = () => {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div style={{ fontSize: "13px" }}>You are about to invest a total sum of <strong>$28,000</strong> at <strong>25</strong> different trade values. You will get notified on each purchase and sale.</div>
+                    <div style={{ fontSize: "13px" }}>You are about to invest a total sum of about <strong>${totalInvestment.toFixed(2)}</strong> at <strong>{buyOrders.length || 0}</strong> different trade values. You will get notified on each purchase and sale.</div>
                     <div className='mt-3'><Button style={{ fontSize: "14px" }} className='rounded-5 w-100' onClick={placeOrder}>Approve Trades</Button></div>
                 </Modal.Body>
             </Modal>
