@@ -1,15 +1,15 @@
 import React from 'react'
 import "./databox.scss"
 
-const DataBox = () => {
+const DataBox = ({name, value, percentage}) => {
     return (
         <div className='dataBox'>
-            <div className='boxLeft ps-3'>Total Investment</div>
+            <div className='boxLeft ps-3'>{name}</div>
             <div className='boxRight text-end pe-4'>
                 <section className='fw-bolder fs-5'>
-                    $ 50,000.00
+                    $ {value}
                 </section>
-                <p>+394.88%</p>
+                <p>+ {percentage}%</p>
             </div>
         </div>
     )
