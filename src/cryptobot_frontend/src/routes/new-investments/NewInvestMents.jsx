@@ -41,6 +41,7 @@ const NewInvestMents = () => {
     const [tradeExitRandomNos, setTradeExitRandomNos] = useState([]);
     const [tradeExitFee, setTradeExitFee] = useState([]);
 
+    const [qtyToBuy, setQtyToBuy] = useState([]);
     const [qtyToSellArray, setQtyToSellArray] = useState([]);
     const [adjustedQtyToSellArray, setAdjustedQtyToSellArray] = useState([]);
     const [grossTradeProfitArray, setGrossTradeProfitArray] = useState([]);
@@ -88,6 +89,12 @@ const NewInvestMents = () => {
         );
         setQtyToSellArray(qtyToSellArray);
 
+        // Calculate qtyToBuy for each iteration and store it in a new array. Each value should be based on "adjustedValues[i]/tradeEntryRandomNos[i]"
+        const qtyToBuy = adjustedValues.map((value, i) =>
+            Math.ceil(value / tradeEntryRandomNos[i])
+        );
+        setQtyToBuy(qtyToBuy);
+
         const adjustedQtyToSellArray = qtyToSellArray.map((qty, i) =>
             Math.ceil(adjustedQtyToSell(qty, TOTAL_AMT, tradeExitRandomNos[i], adjustedValues[i], tradeEntryRandomNos[i], i === 0))
         );
@@ -108,7 +115,7 @@ const NewInvestMents = () => {
             return {
                 symbol: selectedSymbol,
                 type: 'LIMIT',
-                quantity: qtyToSellArray[i],
+                quantity: qtyToBuy[i],
                 price: value
             }
         });
@@ -182,10 +189,10 @@ const NewInvestMents = () => {
                                     <tr key={i}>
                                         <td className='rounded-start-3'>{i + 1}</td>
                                         {/* <td>{item}</td> */}
-                                        <td >{adjustedTradeValues[i]}</td>
+                                        <td>{adjustedTradeValues[i]}</td>
                                         <td>{tradeEntryRandomNos[i]}</td>
                                         <td>{tradeEntryFee[i]}</td>
-                                        <td>{qtyToSellArray[i]}</td>
+                                        <td>{qtyToBuy[i]}</td>
                                         <td>{tradeExitRandomNos[i]}</td>
                                         <td>{tradeExitFee[i]}</td>
                                         <td>{adjustedQtyToSellArray[i]}</td>
