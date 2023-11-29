@@ -158,7 +158,7 @@ const NewInvestmentModal = () => {
               />
             </Form.Group>
             <Form.Group className="mb-3 d-flex">
-              <Form.Label className='mt-1 modalLabel' style={{ width: "150px" }}>Total Investment :</Form.Label>
+              <Form.Label className='mt-1 modalLabel' style={{ width: "150px" }}>Number of Trades :</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Enter Number of Trades to Generate"
@@ -197,7 +197,7 @@ const NewInvestmentModal = () => {
         <div className='pb-4 ps-4 pe-4 text-center'>
           <Button variant="primary w-100 rounded-5 modalBtnColor" onClick={() => {
             // Navigate to the new page and pass state variables
-            navigate(`/new-investments?minEntryPrice=${minEntryPrice}&firstTakeProfitGoal=${firstTakeProfitGoal}&totalInvestment=${totalInvestment}&numTrades=${numTrades}`)
+            navigate(`/new-investments?minEntryPrice=${minEntryPrice}&firstTakeProfitGoal=${firstTakeProfitGoal}&totalInvestment=${totalInvestment}&numTrades=${numTrades}&symbol=${selectedSymbol}&exchange=${selectedExchange}`)
           }}>
             See Investment Plan
           </Button>

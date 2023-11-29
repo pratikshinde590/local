@@ -1,7 +1,7 @@
 import React from 'react'
 import "./new-investment.scss"
 import { Button, Col, Container, Row, Table } from 'react-bootstrap'
-import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import ParameterModal from '../../modals/parameterModal/ParameterModal';
 import { useState, useEffect } from 'react';
 import InvestPopUp from '../../modals/invest-popup/InvestPopUp';
@@ -18,26 +18,43 @@ import {
 
 const NewInvestMents = () => {
 
-    const [searchParams] = useSearchParams();
+    const location = useLocation()
     const navigate = useNavigate();
+    const queryParameters = new URLSearchParams(window.location.search)
 
-    const QTY = searchParams.get("numTrades");
-    const MINIMUM_TRADE_ENTRY_PRICE = searchParams.get("minEntryPrice");
-    const FIRST_TAKE_PROFIT_GOAL = searchParams.get("firstTakeProfitGoal");
-    const TOTAL_AMT = searchParams.get("totalInvestment");
+    const [parameterPopUp, handleParameterPopUp] = useState(false);
+
+
+    // const QTY = queryParameters.get("numTrades");
+    // const MINIMUM_TRADE_ENTRY_PRICE = queryParameters.get("minEntryPrice");
+    // const FIRST_TAKE_PROFIT_GOAL = queryParameters.get("firstTakeProfitGoal");
+    // const TOTAL_AMT = queryParameters.get("totalInvestment");
+    // const selectedSymbol = queryParameters.get("symbol"); 
+    // const selectedExchange = queryParameters.get("exchange");
+
+    const [QTY, setQTY] = useState("")
+    const [MINIMUM_TRADE_ENTRY_PRICE, setMINIMUM_TRADE_ENTRY_PRICE] = useState("")
+    const [FIRST_TAKE_PROFIT_GOAL, setFIRST_TAKE_PROFIT_GOAL] = useState("")
+    const [TOTAL_AMT, setTOTAL_AMT] = useState("")
+    const [selectedSymbol, setselectedSymbol] = useState("")
+
+    useEffect(() => {
+        setQTY(queryParameters.get("numTrades"));
+        setMINIMUM_TRADE_ENTRY_PRICE(queryParameters.get("minEntryPrice"));
+        setFIRST_TAKE_PROFIT_GOAL(queryParameters.get("firstTakeProfitGoal"));
+        setTOTAL_AMT(queryParameters.get("totalInvestment"));
+        setselectedSymbol(queryParameters.get("symbol"));
+    }, [location])
+
+    useEffect(() => {
+        generateTrades();
+    }, [QTY, MINIMUM_TRADE_ENTRY_PRICE, FIRST_TAKE_PROFIT_GOAL, TOTAL_AMT, selectedSymbol]);
 
     // const FIRST_TRADE_AMT = ((TOTAL_AMT/FIRST_TAKE_PROFIT_GOAL) * MINIMUM_TRADE_ENTRY_PRICE)*1.1;
 
     const BUY_FEE_PCT = 0.10;
     const SELL_FEE_PCT = 0.10;
 
-    const selectedSymbol = 'HBARUSDT';
-    // const selectedSymbolPrice = location.state.selectedSymbolPrice;
-    // const firstTakeProfitGoal = location.state.firstTakeProfitGoal;
-    // const totalInvestment = location.state.totalInvestment;
-
-
-    // change starts
     const [randomNumbers, setRandomSeedNumbers] = useState([]);
     const [adjustedTradeValues, setAdjustedTradeValues] = useState([]);
 
@@ -46,6 +63,7 @@ const NewInvestMents = () => {
     const [tradeExitRandomNos, setTradeExitRandomNos] = useState([]);
     const [tradeExitFee, setTradeExitFee] = useState([]);
 
+    const [qtyToBuy, setQtyToBuy] = useState([]);
     const [qtyToSellArray, setQtyToSellArray] = useState([]);
     const [adjustedQtyToSellArray, setAdjustedQtyToSellArray] = useState([]);
     const [grossTradeProfitArray, setGrossTradeProfitArray] = useState([]);
@@ -93,6 +111,12 @@ const NewInvestMents = () => {
         );
         setQtyToSellArray(qtyToSellArray);
 
+        // Calculate qtyToBuy for each iteration and store it in a new array. Each value should be based on "adjustedValues[i]/tradeEntryRandomNos[i]"
+        const qtyToBuy = adjustedValues.map((value, i) =>
+            Math.ceil(value / tradeEntryRandomNos[i])
+        );
+        setQtyToBuy(qtyToBuy);
+
         const adjustedQtyToSellArray = qtyToSellArray.map((qty, i) =>
             Math.ceil(adjustedQtyToSell(qty, TOTAL_AMT, tradeExitRandomNos[i], adjustedValues[i], tradeEntryRandomNos[i], i === 0))
         );
@@ -113,7 +137,7 @@ const NewInvestMents = () => {
             return {
                 symbol: selectedSymbol,
                 type: 'LIMIT',
-                quantity: qtyToSellArray[i],
+                quantity: qtyToBuy[i],
                 price: value
             }
         });
@@ -131,11 +155,6 @@ const NewInvestMents = () => {
         setSellOrders(sellOrders);
     }
 
-    useEffect(() => {
-        generateTrades();
-    }, []);
-
-    const [parameterPopUp, handleParameterPopUp] = useState(false);
 
     return (
 
@@ -185,10 +204,10 @@ const NewInvestMents = () => {
                                     <tr key={i}>
                                         <td className='rounded-start-3'>{i + 1}</td>
                                         {/* <td>{item}</td> */}
-                                        <td >{adjustedTradeValues[i]}</td>
+                                        <td>{adjustedTradeValues[i]}</td>
                                         <td>{tradeEntryRandomNos[i]}</td>
                                         <td>{tradeEntryFee[i]}</td>
-                                        <td>{qtyToSellArray[i]}</td>
+                                        <td>{qtyToBuy[i]}</td>
                                         <td>{tradeExitRandomNos[i]}</td>
                                         <td>{tradeExitFee[i]}</td>
                                         <td>{adjustedQtyToSellArray[i]}</td>

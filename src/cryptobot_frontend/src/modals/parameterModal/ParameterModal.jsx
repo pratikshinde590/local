@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import "./parameter.modal.scss"
 import { Button, Form } from 'react-bootstrap'
 import { getSymbolPrice, getSymbols, resetSymbolList, resetSymbolPrice, setExchange, setSymbol } from '../../store/common/NewInvestReducer';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ExchangeArray } from '../../utils/Constants';
 
@@ -11,6 +11,8 @@ const ParameterModal = ({ handleClose }) => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+	const location = useLocation();
+    const queryParameters = new URLSearchParams(window.location.search)
 
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(true);
@@ -26,11 +28,12 @@ const ParameterModal = ({ handleClose }) => {
     // }
 
 
-    const [minEntryPrice, setMinEntryPrice] = useState("");
-    const [totalInvestment, setTotalInvestment] = useState("");
-    const [firstTakeProfitGoal, setFirstTakeProfitGoal] = useState("");
-    const [numTrades, setNumTrades] = useState(5);
     const { selectedExchange, selectedSymbol, selectedSymbolPrice, symbolList } = useSelector(state => state.NewInvest)
+    
+    const [minEntryPrice, setMinEntryPrice] = useState("");
+    const [totalInvestment, setTotalInvestment] = useState(queryParameters.get("totalInvestment"));
+    const [firstTakeProfitGoal, setFirstTakeProfitGoal] = useState(queryParameters.get("firstTakeProfitGoal"));
+    const [numTrades, setNumTrades] = useState(queryParameters.get("numTrades"));
 
     //---------------- get symbol LIST ----------------//
     useEffect(() => {
@@ -85,7 +88,7 @@ const ParameterModal = ({ handleClose }) => {
                         <Form.Group className="mb-3 d-flex">
                             <Form.Label className='mt-1 modalLabel'>Exchange :</Form.Label>
                             <div className="form-group w-75">
-                                <select className="modalDrop w-100 ps-2" onChange={(e) => dispatch(setExchange(e.target.value))}>
+                                <select defaultValue={selectedExchange} className="modalDrop w-100 ps-2" onChange={(e) => dispatch(setExchange(e.target.value))}>
                                     <option>Select Exchange</option>
                                     {ExchangeArray?.map((val, index) => {
                                         return <option key={index} value={val.value}>{val.name}</option>
@@ -96,9 +99,8 @@ const ParameterModal = ({ handleClose }) => {
                         <Form.Group className="mb-3 d-flex">
                             <Form.Label className='mt-1 modalLabel'>Currency Pair :</Form.Label>
                             <div className="form-group w-75">
-                                <select className="modalDrop w-100 ps-2" onChange={(e) => dispatch(setSymbol(e.target.value))}>
+                                <select defaultValue={selectedSymbol} className="modalDrop w-100 ps-2" onChange={(e) => dispatch(setSymbol(e.target.value))}>
                                     <option>Select Currency Pair</option>
-
                                     {symbolList?.map((val) => {
                                         return (<option key={val} value={val} >{val}</option>)
                                     })}
@@ -110,7 +112,7 @@ const ParameterModal = ({ handleClose }) => {
                         <hr className='modalLine' />
 
                         <Form.Group className="mb-3 d-flex">
-                            <Form.Label className='mt-1 modalLabel'>Min Entry Value:</Form.Label>
+                            <Form.Label className='mt-1 modalLabel'>Min Entry Value :</Form.Label>
                             <Form.Control
                                 type="text"
                                 className='h-25 w-75 ms-auto modalInput bg-light'
@@ -149,7 +151,7 @@ const ParameterModal = ({ handleClose }) => {
                             />
                         </Form.Group>
                         <Form.Group className="mb-3 d-flex">
-                            <Form.Label className='mt-1 modalLabel' style={{ width: "150px" }}>Total Investment :</Form.Label>
+                            <Form.Label className='mt-1 modalLabel' style={{ width: "150px" }}>Number of Trades :</Form.Label>
                             <Form.Control
                                 type="text"
                                 placeholder="Enter Number of Trades to Generate"
@@ -184,9 +186,9 @@ const ParameterModal = ({ handleClose }) => {
 
                         {/* <hr className='modalLine' /> */}
 
-                        <Form.Check className='parameterCheck' type="checkbox" label="Randomize Trade Values" />
+                        {/* <Form.Check className='parameterCheck' type="checkbox" label="Randomize Trade Values" />
                         <Form.Check className='mt-3 parameterCheck' type="checkbox" label="Randomize Entry Price" />
-                        <Form.Check className='mt-3 parameterCheck' type="checkbox" label="Randomize Exit Price" />
+                        <Form.Check className='mt-3 parameterCheck' type="checkbox" label="Randomize Exit Price" /> */}
 
 
                     </Form>
@@ -195,7 +197,7 @@ const ParameterModal = ({ handleClose }) => {
                     <div className='pt-3 pb-2 text-center'>
                         <Button variant="primary w-100 rounded-5 parameterBtnColor" onClick={() => {
                             // Navigate to the new page and pass state variables
-                            navigate(`/new-investments?minEntryPrice=${minEntryPrice}&firstTakeProfitGoal=${firstTakeProfitGoal}&totalInvestment=${totalInvestment}&numTrades=${numTrades}`);
+                            navigate(`/new-investments?minEntryPrice=${minEntryPrice}&firstTakeProfitGoal=${firstTakeProfitGoal}&totalInvestment=${totalInvestment}&numTrades=${numTrades}&symbol=${selectedSymbol}&exchange=${selectedExchange}`);
                             handleClose()
                         }}>
                             Refresh Results

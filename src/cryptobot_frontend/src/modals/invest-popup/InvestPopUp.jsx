@@ -30,6 +30,7 @@ const InvestPopUp = (props) => {
 
     const buyOrders = props.buyOrders;
     const sellOrders = props.sellOrders;
+    const totalInvestment = buyOrders.reduce((acc, order) => acc + order.quantity * order.price, 0);
 
     //------------------------ Place order ------------------//
     const placeOrder = async () => {
@@ -40,6 +41,7 @@ const InvestPopUp = (props) => {
             await dispatch(mexcSellOrder(sellOrderData));
         }
         // navigate("/create-investments");
+        setSmShow(false)
     }
 
 
@@ -60,7 +62,7 @@ const InvestPopUp = (props) => {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div style={{ fontSize: "13px" }}>You are about to invest a total sum of <strong>$28,000</strong> at <strong>25</strong> different trade values. You will get notified on each purchase and sale.</div>
+                    <div style={{ fontSize: "13px" }}>You are about to invest a total sum of about <strong>${totalInvestment.toFixed(2)}</strong> at <strong>{buyOrders.length || 0}</strong> different trade values. You will get notified on each purchase and sale.</div>
                     <div className='mt-3'><Button style={{ fontSize: "14px" }} className='rounded-5 w-100' onClick={placeOrder}>Approve Trades</Button></div>
                 </Modal.Body>
             </Modal>
