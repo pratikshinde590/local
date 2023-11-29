@@ -174,7 +174,7 @@ const NewInvestMents = () => {
                         <Col className='fw-bold'>New Investment Plan</Col>
                         <Col className='text-end newInvestBtnCon'>
                             <Button className='ms-3 rounded-5 ps-4 pe-4 btn-light' style={{ color: "#1193F0" }} onClick={() => handleParameterPopUp(true)}>Parameters</Button>
-                            <Button className='ms-3 rounded-5 ps-4 pe-4 btn-light' style={{ color: "#1193F0" }}>Print</Button>
+                            {/* <Button className='ms-3 rounded-5 ps-4 pe-4 btn-light' style={{ color: "#1193F0" }}>Print</Button> */}
                             <InvestPopUp sellOrders={sellOrders} buyOrders={buyOrders} />
                         </Col>
                     </Row>
