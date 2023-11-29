@@ -28,7 +28,10 @@ const NewInvestmentModal = () => {
   }
 
 
+  const [minEntryPrice, setMinEntryPrice] = useState("");
   const [totalInvestment, setTotalInvestment] = useState("");
+  const [firstTakeProfitGoal, setFirstTakeProfitGoal] = useState("");
+  const [numTrades, setNumTrades] = useState(5);
   const { selectedExchange, selectedSymbol, selectedSymbolPrice, symbolList } = useSelector(state => state.NewInvest)
 
   //---------------- get symbol LIST ----------------//
@@ -54,6 +57,13 @@ const NewInvestmentModal = () => {
     }
   }, [selectedSymbol])
 
+  // Set default value for minEntryPrice
+  useEffect(() => {
+    if (selectedSymbolPrice) {
+      setMinEntryPrice(selectedSymbolPrice);
+    }
+  }, [selectedSymbolPrice])
+
 
 
   return (
@@ -69,7 +79,7 @@ const NewInvestmentModal = () => {
 
         <Modal.Body className='ps-4 pe-4'>
           <Form>
-            <Form.Group className="mb-3 d-flex">
+            {/* <Form.Group className="mb-3 d-flex">
               <Form.Label className='mt-1 modalLabel'>Narrative :</Form.Label>
               <Form.Control
                 type="email"
@@ -78,7 +88,7 @@ const NewInvestmentModal = () => {
               />
             </Form.Group>
 
-            <hr className='modalLine' />
+            <hr className='modalLine' /> */}
 
             <Form.Group className="mb-3 d-flex">
               <Form.Label className='mt-1 modalLabel'>Exchange :</Form.Label>
@@ -109,11 +119,32 @@ const NewInvestmentModal = () => {
             <hr className='modalLine' />
 
             <Form.Group className="mb-3 d-flex">
+              <Form.Label className='mt-1 modalLabel'>Min Entry Value:</Form.Label>
+              <Form.Control
+                type="text"
+                className='h-25 w-75 ms-auto modalInput bg-light'
+                value={minEntryPrice}
+                onChange={(e) => setMinEntryPrice(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3 d-flex">
+              <Form.Label className='mt-1 modalLabel'>1st Take Profit Price Goal:</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter Profit Price Goal"
+                className='h-25 w-75 ms-auto modalInput bg-light'
+                value={firstTakeProfitGoal}
+                onChange={(e) => setFirstTakeProfitGoal(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3 d-flex">
               <Form.Label className='mt-1 modalLabel'>Multiplier :</Form.Label>
               <Form.Control
-                type="email"
+                type="text"
                 placeholder="Enter multiplier"
                 className='h-25 w-75 ms-auto modalInput'
+                value={(minEntryPrice && firstTakeProfitGoal) ? (firstTakeProfitGoal / minEntryPrice).toFixed(2) : 0}
+                readOnly
               />
             </Form.Group>
             <Form.Group className="mb-3 d-flex">
@@ -127,18 +158,20 @@ const NewInvestmentModal = () => {
               />
             </Form.Group>
             <Form.Group className="mb-3 d-flex">
-              <Form.Label className='mt-1 modalLabel'>Min Entry Value:</Form.Label>
+              <Form.Label className='mt-1 modalLabel' style={{ width: "150px" }}>Total Investment :</Form.Label>
               <Form.Control
                 type="text"
-                className='h-25 w-75 ms-auto modalInput bg-light'
-                value={selectedSymbolPrice}
-                readOnly
+                placeholder="Enter Number of Trades to Generate"
+                className='h-25 w-75 ms-auto modalInput'
+                value={numTrades}
+                onChange={(e) => setNumTrades(e.target.value)}
               />
             </Form.Group>
+            
 
-            <hr className='modalLine' />
+            {/* <hr className='modalLine' /> */}
 
-            <Form.Group className="mb-3 d-flex">
+            {/* <Form.Group className="mb-3 d-flex">
               <Form.Label className='mt-1 modalLabel'>Market cap level:</Form.Label>
               <div className="form-group w-75">
                 <select className="modalDrop w-100 ps-2">
@@ -147,8 +180,8 @@ const NewInvestmentModal = () => {
                   <option>Low</option>
                 </select>
               </div>
-            </Form.Group>
-            <Form.Group className="mb-3 d-flex">
+            </Form.Group> */}
+            {/* <Form.Group className="mb-3 d-flex">
               <Form.Label className='mt-1 modalLabel' style={{ width: "150px" }}>Risk:</Form.Label>
               <div className="form-group w-75">
                 <select defaultValue={""} className="modalDrop w-100 ps-2">
@@ -157,12 +190,15 @@ const NewInvestmentModal = () => {
                   <option>Low</option>
                 </select>
               </div>
-            </Form.Group>
+            </Form.Group> */}
           </Form>
         </Modal.Body>
 
         <div className='pb-4 ps-4 pe-4 text-center'>
-          <Button variant="primary w-100 rounded-5 modalBtnColor" onClick={() => navigate("/new-investments")}>
+          <Button variant="primary w-100 rounded-5 modalBtnColor" onClick={() => {
+            // Navigate to the new page and pass state variables
+            navigate("/new-investments", { state: { minEntryPrice, firstTakeProfitGoal, totalInvestment, numTrades } });
+          }}>
             See Investment Plan
           </Button>
         </div>

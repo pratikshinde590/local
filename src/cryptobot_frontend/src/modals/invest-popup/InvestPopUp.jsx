@@ -6,33 +6,40 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { mexcBuyOrder, mexcSellOrder } from '../../store/mexc-store/MexcSlice';
 
-const InvestPopUp = () => {
+const InvestPopUp = (props) => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [smShow, setSmShow] = useState(false);
 
-    //------------- paramter to buy trade --------------------//
-    const buyOrderData = {
-        "symbol": "HBARUSDT",
-        "type": "LIMIT",
-        "quantity": 85,
-        "price": 0.06056
-    }
+    // //------------- sample paramter to buy trade --------------------//
+    // const buyOrderData = {
+    //     "symbol": "HBARUSDT",
+    //     "type": "LIMIT",
+    //     "quantity": 85,
+    //     "price": 0.06056
+    // }
 
-    //------------- paramter to sell trade --------------------//
-    const sellOrderData = {
-        "symbol": "HBARUSDT",
-        "type": "LIMIT",
-        "quantity": 85,
-        "price": 0.06056
-    }
+    // //------------- sample paramter to sell trade --------------------//
+    // const sellOrderData = {
+    //     "symbol": "HBARUSDT",
+    //     "type": "LIMIT",
+    //     "quantity": 85,
+    //     "price": 0.06056
+    // }
+
+    const buyOrders = props.buyOrders;
+    const sellOrders = props.sellOrders;
 
     //------------------------ Place order ------------------//
     const placeOrder = async () => {
-        await dispatch(mexcBuyOrder(buyOrderData));
-        await dispatch(mexcSellOrder(sellOrderData));
-        navigate("/create-investments");
+        for (const buyOrderData of buyOrders) {
+            await dispatch(mexcBuyOrder(buyOrderData));
+        }
+        for (const sellOrderData of sellOrders) {
+            await dispatch(mexcSellOrder(sellOrderData));
+        }
+        // navigate("/create-investments");
     }
 
 
