@@ -1,7 +1,7 @@
 import React from 'react'
 import "./new-investment.scss"
 import { Button, Col, Container, Row, Table } from 'react-bootstrap'
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import ParameterModal from '../../modals/parameterModal/ParameterModal';
 import { useState, useEffect } from 'react';
 import InvestPopUp from '../../modals/invest-popup/InvestPopUp';
@@ -18,13 +18,13 @@ import {
 
 const NewInvestMents = () => {
 
-    // Inside your component
-    const location = useLocation();
+    const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
 
-    const QTY = location.state.numTrades;// 5;
-    const MINIMUM_TRADE_ENTRY_PRICE = location.state.minEntryPrice;//0.05170;
-    const FIRST_TAKE_PROFIT_GOAL = location.state.firstTakeProfitGoal;//0.70000;
-    const TOTAL_AMT = location.state.totalInvestment;//18750;
+    const QTY = searchParams.get("numTrades");
+    const MINIMUM_TRADE_ENTRY_PRICE = searchParams.get("minEntryPrice");
+    const FIRST_TAKE_PROFIT_GOAL = searchParams.get("firstTakeProfitGoal");
+    const TOTAL_AMT = searchParams.get("totalInvestment");
 
     // const FIRST_TRADE_AMT = ((TOTAL_AMT/FIRST_TAKE_PROFIT_GOAL) * MINIMUM_TRADE_ENTRY_PRICE)*1.1;
 
@@ -119,7 +119,7 @@ const NewInvestMents = () => {
         });
         setBuyOrders(buyOrders);
 
-        
+
         const sellOrders = tradeExitRandomNos.map((value, i) => {
             return {
                 symbol: selectedSymbol,
@@ -134,8 +134,6 @@ const NewInvestMents = () => {
     useEffect(() => {
         generateTrades();
     }, []);
-
-    const navigate = useNavigate();
 
     const [parameterPopUp, handleParameterPopUp] = useState(false);
 
