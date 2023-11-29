@@ -25,19 +25,14 @@ const NewInvestMents = () => {
     const MINIMUM_TRADE_ENTRY_PRICE = location.state.minEntryPrice;//0.05170;
     const FIRST_TAKE_PROFIT_GOAL = location.state.firstTakeProfitGoal;//0.70000;
     const TOTAL_AMT = location.state.totalInvestment;//18750;
+    const selectedSymbol = location.state.symbol; 
+    const selectedExchange = location.state.exchange;
 
     // const FIRST_TRADE_AMT = ((TOTAL_AMT/FIRST_TAKE_PROFIT_GOAL) * MINIMUM_TRADE_ENTRY_PRICE)*1.1;
 
     const BUY_FEE_PCT = 0.10;
     const SELL_FEE_PCT = 0.10;
 
-    const selectedSymbol = 'HBARUSDT';
-    // const selectedSymbolPrice = location.state.selectedSymbolPrice;
-    // const firstTakeProfitGoal = location.state.firstTakeProfitGoal;
-    // const totalInvestment = location.state.totalInvestment;
-
-
-    // change starts
     const [randomNumbers, setRandomSeedNumbers] = useState([]);
     const [adjustedTradeValues, setAdjustedTradeValues] = useState([]);
 

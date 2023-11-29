@@ -197,7 +197,7 @@ const NewInvestmentModal = () => {
         <div className='pb-4 ps-4 pe-4 text-center'>
           <Button variant="primary w-100 rounded-5 modalBtnColor" onClick={() => {
             // Navigate to the new page and pass state variables
-            navigate("/new-investments", { state: { minEntryPrice, firstTakeProfitGoal, totalInvestment, numTrades } });
+            navigate("/new-investments", { state: { exchange: selectedExchange, symbol: selectedSymbol, minEntryPrice, firstTakeProfitGoal, totalInvestment, numTrades } });
           }}>
             See Investment Plan
           </Button>
