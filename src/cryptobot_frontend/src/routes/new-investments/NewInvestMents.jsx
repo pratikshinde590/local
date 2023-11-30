@@ -23,14 +23,7 @@ const NewInvestMents = () => {
     const queryParameters = new URLSearchParams(window.location.search)
 
     const [parameterPopUp, handleParameterPopUp] = useState(false);
-
-
-    // const QTY = queryParameters.get("numTrades");
-    // const MINIMUM_TRADE_ENTRY_PRICE = queryParameters.get("minEntryPrice");
-    // const FIRST_TAKE_PROFIT_GOAL = queryParameters.get("firstTakeProfitGoal");
-    // const TOTAL_AMT = queryParameters.get("totalInvestment");
-    // const selectedSymbol = queryParameters.get("symbol"); 
-    // const selectedExchange = queryParameters.get("exchange");
+    ;
 
     const [QTY, setQTY] = useState("")
     const [MINIMUM_TRADE_ENTRY_PRICE, setMINIMUM_TRADE_ENTRY_PRICE] = useState("")
@@ -50,7 +43,6 @@ const NewInvestMents = () => {
         generateTrades();
     }, [QTY, MINIMUM_TRADE_ENTRY_PRICE, FIRST_TAKE_PROFIT_GOAL, TOTAL_AMT, selectedSymbol]);
 
-    // const FIRST_TRADE_AMT = ((TOTAL_AMT/FIRST_TAKE_PROFIT_GOAL) * MINIMUM_TRADE_ENTRY_PRICE)*1.1;
 
     const BUY_FEE_PCT = 0.10;
     const SELL_FEE_PCT = 0.10;
@@ -69,8 +61,6 @@ const NewInvestMents = () => {
     const [grossTradeProfitArray, setGrossTradeProfitArray] = useState([]);
     const [netTradeProfitArray, setNetTradeProfitArray] = useState([]);
 
-    const [minTradeEntryPrice, setMinTradeEntryPrice] = useState(MINIMUM_TRADE_ENTRY_PRICE);
-    const [firstTakeProfitGoal, setFirstTakeProfitGoal] = useState(FIRST_TAKE_PROFIT_GOAL);
 
     // buy orders
     const [buyOrders, setBuyOrders] = useState([]);

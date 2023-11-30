@@ -1,39 +1,17 @@
-import React, { useState, useEffect } from 'react'
-import { useNavigate, Link } from "react-router-dom";
+import React from 'react'
+import { Link } from "react-router-dom";
 import NewInvestment from "../../modals/Investment-modal/NewInvestment.modal";
-import { AuthClient } from '@dfinity/auth-client';
 import { Button, Container, Dropdown, Navbar, Nav } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { handleLogout } from "../../store/auth/auth.reducer";
 // import profile from "../../../assets/Ellipse 64.svg";
 
 
 const NavBar = () => {
-    const navigate = useNavigate();
-    const [authClient, setAuthClient] = useState();
-    const [userIdentity, setUserIdentity] = useState();
 
-    useEffect(() => {
-        (async () => {
-            const authClient = await AuthClient.create();
-            setAuthClient(authClient);
-
-            if (await authClient.isAuthenticated()) {
-                handleAuthenticated(authClient);
-            }
-        })();
-    }, []);
-
-    const handleAuthenticated = async (authClient) => {
-        const identity = authClient.getIdentity();
-        setUserIdentity(identity);
-    };
-
-    const handleLogout = async () => {
-        if (!authClient) return;
-
-        // Sign out of Internet Identity
-        await authClient.logout();
-        setUserIdentity(null);
-        navigate("/");
+    const dispatch = useDispatch();
+    const logout = async () => {
+        dispatch(handleLogout());
     };
 
     return (
@@ -66,7 +44,7 @@ const NavBar = () => {
                                 </Dropdown.Toggle>
 
                                 <Dropdown.Menu>
-                                    <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+                                    <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                         </Nav>
