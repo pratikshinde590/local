@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
 import NewInvestment from "../../modals/Investment-modal/NewInvestment.modal";
 import { Button, Container, Dropdown, Navbar, Nav } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { handleLogout } from "../../store/auth/auth.reducer";
 // import profile from "../../../assets/Ellipse 64.svg";
+import { AuthClient } from '@dfinity/auth-client';
+
 
 
 const NavBar = () => {
@@ -13,6 +15,17 @@ const NavBar = () => {
     const logout = async () => {
         dispatch(handleLogout());
     };
+
+    const [id, setId] = useState();
+    const getClientId = async () => {
+        const client = await AuthClient.create();
+        setId(client.getIdentity().getPrincipal().toString())
+        console.log(client.getIdentity().getPrincipal().toString())
+    }
+
+    useEffect(() => {
+        getClientId()
+    }, [])
 
     return (
         <>
@@ -35,6 +48,8 @@ const NavBar = () => {
                             {/* <Button className="rounded-5 px-4 me-lg-2 mt-3 m-lg-0" style={{ width: "150px", lineHeight: "35px" }} variant="primary" size="sm">
                                 Connect Wallet
                             </Button> */}
+
+                            <div className='me-3 mt-2 text-center' style={{ fontSize: "12px" }}><strong>User Id :</strong> {id} </div>
 
                             <NewInvestment />
 
