@@ -1,9 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import AxiosInstance from "../../utils/AxiosInstance"
 
-export const mexcBuyOrder = createAsyncThunk("mexc/placeOrder", async (orderData) => {
+export const mexcBuyOrder = async (orderData) => {
     try {
-        console.log(orderData);
         const formData = new FormData();
         formData.append("symbol", orderData.symbol)
         formData.append("type", orderData.type)
@@ -16,7 +15,7 @@ export const mexcBuyOrder = createAsyncThunk("mexc/placeOrder", async (orderData
     } catch (error) {
         console.log(error);
     }
-});
+}
 
 export const mexcSellOrder = createAsyncThunk("mexc/sellOrder", async (orderData) => {
     try {
