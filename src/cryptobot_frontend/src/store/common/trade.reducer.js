@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import AxiosInstance from "../../utils/AxiosInstance"
+import AxiosInstance from "../../utils/AxiosInstance";
 
 export const getTrades = createAsyncThunk("trades/getTrades", () => {
     try {
-        let array = localStorage.getItem("tradeArray");
+        let array = localStorage.getItem("allTrades");
         array = JSON.parse(array);
         if (array)
             return array;
@@ -13,34 +13,35 @@ export const getTrades = createAsyncThunk("trades/getTrades", () => {
     }
 });
 
-export const storeTrades = createAsyncThunk("trades/storeTrades", (tradeArray) => {
+export const storeTrades = createAsyncThunk("trades/storeTrades", (tradeObj) => {
     try {
-        let array = localStorage.getItem("tradeArray");
+        let array = localStorage.getItem("allTrades");
         if (array) {
             array = JSON.parse(array);
-            const newArray = [...array, ...tradeArray];
+            const newArray = [...array, tradeObj];
             return newArray;
         }
-        return tradeArray;
+        return [tradeObj];
     } catch (error) {
         console.log(error);
     }
 });
 
+
 const TradeSlice = createSlice({
     name: "trades",
     initialState: {
-        tradeArray: []
+        allTrades: []
     },
     reducers: {},
 
     extraReducers: (builder) => {
         builder.addCase(storeTrades.fulfilled, (state, action) => {
-            state.tradeArray = action.payload
-            localStorage.setItem("tradeArray", JSON.stringify(action.payload));
+            state.allTrades = action.payload
+            localStorage.setItem("allTrades", JSON.stringify(action.payload));
         })
         builder.addCase(getTrades.fulfilled, (state, action) => {
-            state.tradeArray = action.payload;
+            state.allTrades = action.payload;
         })
     }
 })
