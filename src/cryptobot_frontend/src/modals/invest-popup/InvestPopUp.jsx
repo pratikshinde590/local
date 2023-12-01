@@ -5,6 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { mexcBuyOrder, mexcSellOrder } from '../../store/mexc-store/MexcSlice';
+import { storeTrades } from '../../store/common/trade.reducer';
 
 const InvestPopUp = (props) => {
 
@@ -34,13 +35,23 @@ const InvestPopUp = (props) => {
 
     //------------------------ Place order ------------------//
     const placeOrder = async () => {
-        for (const buyOrderData of buyOrders) {
-            await dispatch(mexcBuyOrder(buyOrderData));
+        let tradeArray = [];
+        for (let i = 0; i < buyOrders.length; i++) {
+            tradeArray.push({
+                buy: buyOrders[i],
+                sell: sellOrders[i]
+            })
         }
-        for (const sellOrderData of sellOrders) {
-            await dispatch(mexcSellOrder(sellOrderData));
+        for (let i = 0; i < tradeArray.length; i++) {
+            const data = await mexcBuyOrder(tradeArray[i].buy);
+            if (data.orderId) {
+                tradeArray[i].buy = { status: "Pending", ...tradeArray[i].buy, ...data };
+            } else {
+                tradeArray[i].buy = { ...tradeArray[i].buy, status: "FAILED" };
+            }
         }
-        // navigate("/create-investments");
+        dispatch(storeTrades(tradeArray));
+        navigate("/create-investments");
         setSmShow(false)
     }
 

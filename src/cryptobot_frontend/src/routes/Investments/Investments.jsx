@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./investments.scss"
 import { Button, Col, Container, Pagination, Row, Table } from "react-bootstrap";
-// import Navbar from "../../components/menu/NavBar";
 import { useNavigate } from "react-router-dom";
-import NavBar from "../../components/menu/NavBar";
 // import history from "../../assets/history.svg"
+import { useDispatch, useSelector } from 'react-redux'
+import { getTrades } from '../../store/common/trade.reducer'
+import NavBar from "../../components/menu/NavBar";
 
 const Investments = () => {
 
   const navigate = useNavigate();
-  const array = ["", "", "", "", "", "", "", "", "", "", ""];
+  const dispatch = useDispatch();
+  // const array = ["", "", "", "", "", "", "", "", "", "", ""];
+
+  const { tradeArray } = useSelector(state => state.Trades);
+  useEffect(() => {
+    dispatch(getTrades())
+  }, []);
+
+  useEffect(() => {
+    console.log(tradeArray)
+  }, [tradeArray])
 
   return (
     <>
@@ -57,7 +68,7 @@ const Investments = () => {
         </Container>
 
         <Container className='mt-3'>
-          <Table responsive striped hover>
+          {/* <Table responsive striped hover>
             <thead style={{ fontSize: "14px" }}>
               <tr>
                 <th className='bg-dark text-white fw-medium rounded-start-3'>#</th>
@@ -90,6 +101,43 @@ const Investments = () => {
                     <td>$1,234.53</td>
                     <td className='text-success'>802 %</td>
                     <td className='rounded-end-3'>78</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table> */}
+
+          <Table responsive striped hover>
+            <thead style={{ fontSize: "14px" }}>
+              <tr>
+                <th className='bg-dark text-white fw-medium rounded-start-3'>#</th>
+                <th className='bg-dark text-white fw-medium'>Entry ID</th>
+                <th className='bg-dark text-white fw-medium'>Symbol</th>
+                <th className='bg-dark text-white fw-medium'>Entry Price</th>
+                <th className='bg-dark text-white fw-medium'>Buy Quantity</th>
+                <th className='bg-dark text-white fw-medium'>Symbol Quantity</th>
+                <th className='bg-dark text-white fw-medium'>Type</th>
+                <th className='bg-dark text-white fw-medium'>status</th>
+                <th className='bg-dark text-white fw-medium'>Exit ID</th>
+                <th className='bg-dark text-white fw-medium'>Exit Price</th>
+                <th className='bg-dark text-white fw-medium'>Sell Quantity</th>
+              </tr>
+            </thead>
+            <tbody style={{ fontSize: "13px" }}>
+              {tradeArray.map((val, index) => {
+                return (
+                  <tr onClick={() => navigate("/create-investments")}>
+                    <td className='rounded-start-3'>{index + 1}</td>
+                    <td>{val.buy?.orderId}</td>
+                    <td>{val.buy?.symbol}</td>
+                    <td>${val.buy?.price}</td>
+                    <td>{val.buy?.origQty}</td>
+                    <td>{val.buy?.origQty}</td>
+                    <td>{val.buy?.type}</td>
+                    <td>{val.buy?.status}</td>
+                    <td>{"None"}</td>
+                    <td>${val.sell?.price}</td>
+                    <td>{val.sell?.quantity}</td>
                   </tr>
                 );
               })}
