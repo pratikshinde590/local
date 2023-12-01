@@ -59,7 +59,9 @@ const ParameterModal = ({ handleClose }) => {
     // Set default value for minEntryPrice
     useEffect(() => {
         if (selectedSymbolPrice) {
-            setMinEntryPrice(selectedSymbolPrice);
+            if (selectedSymbol != queryParameters.get("symbol")) {
+                setMinEntryPrice(selectedSymbolPrice);
+            }
         }
     }, [selectedSymbolPrice])
 
