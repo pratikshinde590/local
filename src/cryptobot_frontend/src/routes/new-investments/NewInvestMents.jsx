@@ -60,6 +60,7 @@ const NewInvestMents = () => {
     const [adjustedQtyToSellArray, setAdjustedQtyToSellArray] = useState([]);
     const [grossTradeProfitArray, setGrossTradeProfitArray] = useState([]);
     const [netTradeProfitArray, setNetTradeProfitArray] = useState([]);
+    const [tradeInfo, setTradeInfo] = useState();
 
 
     // buy orders
@@ -123,6 +124,9 @@ const NewInvestMents = () => {
         );
         setNetTradeProfitArray(netTradeProfitArray);
 
+
+        //---------------------------------------- Trade Data ----------------------------------//
+
         const buyOrders = tradeEntryRandomNos.map((value, i) => {
             return {
                 symbol: selectedSymbol,
@@ -143,6 +147,16 @@ const NewInvestMents = () => {
             }
         });
         setSellOrders(sellOrders);
+
+        setTradeInfo({
+            exchange: queryParameters.get("exchange"),
+            symbol: queryParameters.get("symbol"),
+            totalInvest: queryParameters.get("totalInvestment"),
+            numTrades: queryParameters.get("numTrades"),
+            firstTakeProfitGoal: queryParameters.get("firstTakeProfitGoal")
+        })
+
+        //------------------------------------------------------------------------------------//
     }
 
 
@@ -165,7 +179,7 @@ const NewInvestMents = () => {
                         <Col className='text-end newInvestBtnCon'>
                             <Button className='ms-3 rounded-5 ps-4 pe-4 btn-light' style={{ color: "#1193F0" }} onClick={() => handleParameterPopUp(true)}>Parameters</Button>
                             {/* <Button className='ms-3 rounded-5 ps-4 pe-4 btn-light' style={{ color: "#1193F0" }}>Print</Button> */}
-                            <InvestPopUp sellOrders={sellOrders} buyOrders={buyOrders} />
+                            <InvestPopUp tradeInfo={tradeInfo} sellOrders={sellOrders} buyOrders={buyOrders} />
                         </Col>
                     </Row>
                 </Container>

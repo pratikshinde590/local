@@ -28,14 +28,14 @@ const InvestPopUp = (props) => {
     //     "quantity": 85,
     //     "price": 0.06056
     // }
-
+    const tradeInfo = props.tradeInfo;
     const buyOrders = props.buyOrders;
     const sellOrders = props.sellOrders;
     const totalInvestment = buyOrders.reduce((acc, order) => acc + order.quantity * order.price, 0);
 
     //------------------------ Place order ------------------//
     const placeOrder = async () => {
-        let tradeArray = [];
+        let tradeArray = []
         for (let i = 0; i < buyOrders.length; i++) {
             tradeArray.push({
                 buy: buyOrders[i],
@@ -50,9 +50,10 @@ const InvestPopUp = (props) => {
                 tradeArray[i].buy = { ...tradeArray[i].buy, status: "FAILED" };
             }
         }
-        dispatch(storeTrades(tradeArray));
-        navigate("/create-investments");
-        setSmShow(false)
+        const tradeId = Math.round(Math.random() * 1000000);
+        dispatch(storeTrades({ ...tradeInfo, id: tradeId, tradeArray: tradeArray }));
+        navigate(`/create-investments?tradeId=${tradeId}&exchange=${tradeInfo.exchange}&symbol=${tradeInfo.symbol}&totalInvest=${tradeInfo.totalInvest}&numTrades=${tradeInfo.numTrades}`);
+        setSmShow(false);
     }
 
 
