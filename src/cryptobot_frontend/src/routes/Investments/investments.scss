@@ -17,4 +17,14 @@
         height: 70px;
         min-width: 250px;
     }
+
+    .tableRow {
+
+        td,
+        th {
+            text-align: center;
+        }
+
+        cursor: pointer;
+    }
 }
