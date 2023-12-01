@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Form } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
 import "./new.investment.modal.scss"
+import { Form, Button, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ExchangeArray } from '../../utils/Constants';
@@ -79,16 +77,6 @@ const NewInvestmentModal = () => {
 
         <Modal.Body className='ps-4 pe-4'>
           <Form>
-            {/* <Form.Group className="mb-3 d-flex">
-              <Form.Label className='mt-1 modalLabel'>Narrative :</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Enter Narrative"
-                className='h-25 w-75 ms-auto modalInput'
-              />
-            </Form.Group>
-
-            <hr className='modalLine' /> */}
 
             <Form.Group className="mb-3 d-flex">
               <Form.Label className='mt-1 modalLabel'>Exchange :</Form.Label>
@@ -101,6 +89,7 @@ const NewInvestmentModal = () => {
                 </select>
               </div>
             </Form.Group>
+
             <Form.Group className="mb-3 d-flex">
               <Form.Label className='mt-1 modalLabel'>Currency Pair :</Form.Label>
               <div className="form-group w-75">
@@ -115,7 +104,6 @@ const NewInvestmentModal = () => {
               </div>
             </Form.Group>
 
-
             <hr className='modalLine' />
 
             <Form.Group className="mb-3 d-flex">
@@ -127,6 +115,7 @@ const NewInvestmentModal = () => {
                 onChange={(e) => setMinEntryPrice(e.target.value)}
               />
             </Form.Group>
+
             <Form.Group className="mb-3 d-flex">
               <Form.Label className='mt-1 modalLabel'>1st Take Profit Price Goal:</Form.Label>
               <Form.Control
@@ -137,6 +126,7 @@ const NewInvestmentModal = () => {
                 onChange={(e) => setFirstTakeProfitGoal(e.target.value)}
               />
             </Form.Group>
+
             <Form.Group className="mb-3 d-flex">
               <Form.Label className='mt-1 modalLabel'>Multiplier :</Form.Label>
               <Form.Control
@@ -147,6 +137,7 @@ const NewInvestmentModal = () => {
                 readOnly
               />
             </Form.Group>
+
             <Form.Group className="mb-3 d-flex">
               <Form.Label className='mt-1 modalLabel' style={{ width: "150px" }}>Total Investment :</Form.Label>
               <Form.Control
@@ -157,6 +148,7 @@ const NewInvestmentModal = () => {
                 onChange={(e) => setTotalInvestment(e.target.value)}
               />
             </Form.Group>
+
             <Form.Group className="mb-3 d-flex">
               <Form.Label className='mt-1 modalLabel' style={{ width: "150px" }}>Number of Trades :</Form.Label>
               <Form.Control
@@ -167,30 +159,7 @@ const NewInvestmentModal = () => {
                 onChange={(e) => setNumTrades(e.target.value)}
               />
             </Form.Group>
-            
 
-            {/* <hr className='modalLine' /> */}
-
-            {/* <Form.Group className="mb-3 d-flex">
-              <Form.Label className='mt-1 modalLabel'>Market cap level:</Form.Label>
-              <div className="form-group w-75">
-                <select className="modalDrop w-100 ps-2">
-                  <option>Assign Market cap level</option>
-                  <option>High</option>
-                  <option>Low</option>
-                </select>
-              </div>
-            </Form.Group> */}
-            {/* <Form.Group className="mb-3 d-flex">
-              <Form.Label className='mt-1 modalLabel' style={{ width: "150px" }}>Risk:</Form.Label>
-              <div className="form-group w-75">
-                <select defaultValue={""} className="modalDrop w-100 ps-2">
-                  <option>Assign Risk</option>
-                  <option>High</option>
-                  <option>Low</option>
-                </select>
-              </div>
-            </Form.Group> */}
           </Form>
         </Modal.Body>
 

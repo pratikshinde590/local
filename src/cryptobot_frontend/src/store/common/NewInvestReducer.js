@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import AxiosInstance from "../../utils/AxiosInstance"
-import { ExchangeArray, Exchanges } from "../../utils/Constants";
+import { ExchangeArray } from "../../utils/Constants";
 
 
 export const getSymbols = createAsyncThunk("new-invest/getSymbols", async (exchange) => {
@@ -75,13 +75,13 @@ const NewInvestSlice = createSlice({
             state.selectedExchange = action.payload;
         })
         builder.addCase(getSymbols.fulfilled, (state, action) => {
-            state.symbolList = action.payload.data;
+            state.symbolList = action.payload?.data;
         })
         builder.addCase(setSymbol.fulfilled, (state, action) => {
             state.selectedSymbol = action.payload;
         })
         builder.addCase(getSymbolPrice.fulfilled, (state, action) => {
-            state.selectedSymbolPrice = action.payload.price;
+            state.selectedSymbolPrice = action.payload?.price;
         })
         builder.addCase(resetSymbolPrice.fulfilled, (state) => {
             state.selectedSymbolPrice = "";

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import "./parameter.modal.scss"
 import { Button, Form } from 'react-bootstrap'
-import { getSymbolPrice, getSymbols, resetSymbolList, resetSymbolPrice, setExchange, setSymbol } from '../../store/common/NewInvestReducer';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { getSymbolPrice, getSymbols, resetSymbolList, setExchange, setSymbol } from '../../store/common/NewInvestReducer';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ExchangeArray } from '../../utils/Constants';
 
@@ -11,40 +11,38 @@ const ParameterModal = ({ handleClose }) => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-	const location = useLocation();
     const queryParameters = new URLSearchParams(window.location.search)
-
-    const [show, setShow] = useState(false);
-    const handleShow = () => setShow(true);
-
-    //------------------------- reset investment Form -------------------//
-    // const handleClose = () => {
-    //     setShow(false);
-    //     setTotalInvestment("");
-    //     dispatch(setExchange(""));
-    //     dispatch(setSymbol(""));
-    //     dispatch(resetSymbolPrice(""));
-    //     dispatch(resetSymbolList());
-    // }
 
 
     const { selectedExchange, selectedSymbol, selectedSymbolPrice, symbolList } = useSelector(state => state.NewInvest)
-    
-    const [minEntryPrice, setMinEntryPrice] = useState("");
+
+    const [minEntryPrice, setMinEntryPrice] = useState(queryParameters.get("minEntryPrice"));
     const [totalInvestment, setTotalInvestment] = useState(queryParameters.get("totalInvestment"));
     const [firstTakeProfitGoal, setFirstTakeProfitGoal] = useState(queryParameters.get("firstTakeProfitGoal"));
     const [numTrades, setNumTrades] = useState(queryParameters.get("numTrades"));
+    const [exchangeState, setExchangeState] = useState(queryParameters.get("exchange"));
+    const [symbolState] = useState(queryParameters.get("symbol"));
+
 
     //---------------- get symbol LIST ----------------//
     useEffect(() => {
-        if (selectedExchange) {
+        if (exchangeState) {
+            dispatch(setExchange(exchangeState));
+            dispatch(resetSymbolList());
             ExchangeArray.map((val) => {
-                if (selectedExchange === val.value) {
+                if (exchangeState === val.value) {
                     dispatch(getSymbols(val.value))
                 }
             })
         }
-    }, [selectedExchange])
+    }, [exchangeState])
+
+    //-------------------------- set selected symbol ----------------//
+    useEffect(() => {
+        if (symbolState) {
+            dispatch(setSymbol(symbolState));
+        }
+    }, [symbolState])
 
 
     //-------------------- currency pair price -----------------------//
@@ -88,7 +86,7 @@ const ParameterModal = ({ handleClose }) => {
                         <Form.Group className="mb-3 d-flex">
                             <Form.Label className='mt-1 modalLabel'>Exchange :</Form.Label>
                             <div className="form-group w-75">
-                                <select defaultValue={selectedExchange} className="modalDrop w-100 ps-2" onChange={(e) => dispatch(setExchange(e.target.value))}>
+                                <select defaultValue={exchangeState} className="modalDrop w-100 ps-2" onChange={(e) => { setExchangeState(e.target.value) }}>
                                     <option>Select Exchange</option>
                                     {ExchangeArray?.map((val, index) => {
                                         return <option key={index} value={val.value}>{val.name}</option>
@@ -96,15 +94,15 @@ const ParameterModal = ({ handleClose }) => {
                                 </select>
                             </div>
                         </Form.Group>
+
                         <Form.Group className="mb-3 d-flex">
                             <Form.Label className='mt-1 modalLabel'>Currency Pair :</Form.Label>
                             <div className="form-group w-75">
-                                <select defaultValue={selectedSymbol} className="modalDrop w-100 ps-2" onChange={(e) => dispatch(setSymbol(e.target.value))}>
+                                <select value={selectedSymbol} className="modalDrop w-100 ps-2" onChange={(e) => dispatch(setSymbol(e.target.value))}>
                                     <option>Select Currency Pair</option>
                                     {symbolList?.map((val) => {
                                         return (<option key={val} value={val} >{val}</option>)
                                     })}
-
                                 </select>
                             </div>
                         </Form.Group>
