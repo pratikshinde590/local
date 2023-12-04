@@ -1,29 +1,31 @@
-name: Deploy to Juno
+name: Deploy to ICP
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
-    steps:
-      - name: Check out the repo
-        uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v3
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: 16
+
+      - name: Pull Latest Changes
+        run: git pull origin main
 
       - name: Install Dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build
         run: npm run build
 
-      - name: Deploy to Juno
-        uses: buildwithjuno/juno-action@main
-        with:
-          args: deploy
-        env:
-          JUNO_TOKEN: ${{ secrets.JUNO_TOKEN }}
+      - name: Deploy to ICP
+        run: dfx deploy --network ic
